@@ -23,6 +23,13 @@ routes.post('/feedbacks', async (req, res) => {
     return res.status(201).send();
 })
 
+routes.get('/feedbacks', async (req, res) => {
+    const feedbacks = await prisma.feedback.findMany()
+    return res.status(201).send();
+  })
+  
+
+
 routes.delete(`/feedbacks/:id`, async (req, res) => {
     const { id } = req.params
 
