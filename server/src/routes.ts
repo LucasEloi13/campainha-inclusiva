@@ -25,7 +25,15 @@ routes.post('/feedbacks', async (req, res) => {
 
 routes.get('/feedbacks', async (req, res) => {
     const feedbacks = await prisma.feedback.findMany()
-    return res.status(201).send();
+    return res.status(201).send(feedbacks);
+  })
+
+routes.get(`/feedbacks/:id`, async (req, res) => {
+    const { id } = req.params
+    const feedbacks = await prisma.feedback.findUnique({
+      where: { id: String(id) },
+    })
+    return res.status(201).send(feedbacks);
   })
   
 
